@@ -29,7 +29,7 @@ jobs:
         run: echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
       - env:
           GH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-        run: envsubst '${GH_TOKEN}' < .github/ci/settings.xml.template > settings.xml
+        run: envsubst '${GH_TOKEN}' < .github/ci/settings.xml.template > m2_config.xml
       - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
