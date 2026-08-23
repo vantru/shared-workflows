@@ -40,7 +40,7 @@ jobs:
           context: ${{ inputs.context }}
           push: true
           secrets: |
-            maven_settings=settings.xml
+            maven_settings=m2_config.xml
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ steps.vars.outputs.short_sha }}
       - if: always()
         run: rm -f settings.xml
