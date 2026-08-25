@@ -30,11 +30,7 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
-          envsubst '${GH_TOKEN}' < .github/ci/settings.xml.template > abc_data.xml
-          if grep -q '\${GH_TOKEN}' abc_data.xml; then
-            echo "ERROR: GH_TOKEN was not substituted!"
-            exit 1
-          fi
+          envsubst '${GH_TOKEN}' < .github/ci/settings.xml.template > settings.xml
       - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -45,7 +41,7 @@ jobs:
           context: ${{ inputs.context }}
           push: true
           secret-files: |
-            maven_settings=abc_data.xml
+            maven_settings=settings.xml
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ steps.vars.outputs.short_sha }}
       - if: always()
-        run: rm -f abc_data.xml
+        run: rm -f settings.xml
