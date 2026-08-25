@@ -30,7 +30,7 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
-          envsubst '${GH_TOKEN}' < .github/ci/settings.xml.template > settings.xml
+          envsubst < .github/ci/settings.xml.template > settings.xml
       - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
