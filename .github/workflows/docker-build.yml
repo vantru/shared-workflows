@@ -17,6 +17,9 @@ on:
         required: true
       GH_PACKAGES_TOKEN:
         required: true
+    outputs:
+      short_sha:
+        value: ${{ jobs.build.outputs.short_sha }}
 
 jobs:
   build:
